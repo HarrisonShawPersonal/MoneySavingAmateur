@@ -1,19 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Calculate Taxes</title>
-</head>
-<body>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Heading styles */
+      h1 {
+        text-align: center;
+        color: #007bff;
+      }
+
+      h2 {
+        color: #343a40;
+      }
+
+      /* Form styles */
+      form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      form label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      form input[type="text"],
+      form select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      form button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      form button[type="submit"]:hover {    
+        background-color: #0056b3;
+        .tax-table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+      }
+      .tax-table th,
+      .tax-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      .tax-table th {
+        background-color: #f2f2f2;
+      }
+
+      .tax-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      .tax-table tr:hover {
+        background-color: #ddd;
+      }
+    </style>
+  </head>
+  <body>
     <h1>Calculate Taxes</h1>
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Calculate</button>
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Calculate</button>
     </form>
-    
-    <h2>Tax Calculation Result</h2>
-    <p>NI Contribution: {{ ni_contribution }}</p>
-    <p>Income Tax: {{ income_tax }}</p>
-</body>
+    <div>
+      {% if ni_contribution is not None and income_tax is not None %}
+      
+      <h2>Tax Calculation Result</h2>
+      
+      <table class="tax-table">
+        <tr>
+          <th></th>
+          <th>Yearly</th>
+          <th>Monthly</th>
+          <th>Weekly</th>
+          <th>Daily</th>
+        </tr>
+        <tr>
+          <td>Gross Income</td>
+          <td>£{{ gross_salary }}</td>
+          <td>£{{ breakdown_result.gross_salary.monthly }}</td>
+          <td>£{{ breakdown_result.gross_salary.weekly }}</td>
+          <td>£{{ breakdown_result.gross_salary.daily }}</td>
+        </tr>
+        <tr>
+            <td>National Insurance Contribution</td>
+            <td>£{{ ni_contribution }}</td>
+            <td>£{{ breakdown_result.ni_contribution.monthly }}</td>
+            <td>£{{ breakdown_result.ni_contribution.weekly }}</td>
+            <td>£{{ breakdown_result.ni_contribution.daily }}</td>
+        </tr>
+        <tr>
+          <td>Income Tax</td>
+          <td>£{{ income_tax }}</td>
+          <td>£{{ breakdown_result.income_tax.monthly }}</td>
+          <td>£{{ breakdown_result.income_tax.weekly }}</td>
+          <td>£{{ breakdown_result.income_tax.daily}}</td>
+        </tr>
+        <tr>
+          <td>Gross Take Home</td>
+          <td>£{{ net_salary }}</td>
+          <td>£{{ breakdown_result.net_salary.monthly }}</td>
+          <td>£{{ breakdown_result.net_salary.weekly }}</td>
+          <td>£{{ breakdown_result.net_salary.daily }}</td>
+        </tr>
+      </table>
+      {% endif %}
+    </div>
+  </body>
 </html>
