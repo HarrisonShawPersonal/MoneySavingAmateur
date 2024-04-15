@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Money Saving Amateur's Income Tax Calculator</title>
+    <title>Calculate Taxes</title>
 </head>
 <body>
-    <h1>Income Tax Calculator</h1>
+    <h1>Calculate Taxes</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Calculate</button>
     </form>
-    {% if net_amount %}
-        <p>{{ net_amount }}</p>
-    {% endif %}
+    
+    <h2>Tax Calculation Result</h2>
+    <p>NI Contribution: {{ ni_contribution }}</p>
+    <p>Income Tax: {{ income_tax }}</p>
 </body>
 </html>
