@@ -45,49 +45,43 @@ def net(gross_salary):
     return ni_contribution, income_tax, net_salary
 
 def breakdown(gross_salary, ni_contribution, income_tax, net_salary):
-    # Calculate monthly, weekly, and daily values
-    monthly_gross_salary = gross_salary / 12
-    weekly_gross_salary = gross_salary / 52
-    daily_gross_salary = gross_salary / 365
 
-    monthly_ni_contribution = ni_contribution / 12
-    weekly_ni_contribution = ni_contribution / 52
-    daily_ni_contribution = ni_contribution / 365
+    monthly_values = [value / 12 for value in (gross_salary, ni_contribution, income_tax, net_salary)]
+    weekly_values = [value / 52 for value in (gross_salary, ni_contribution, income_tax, net_salary)]
+    daily_values = [value / 365 for value in (gross_salary, ni_contribution, income_tax, net_salary)]
 
-    monthly_income_tax = income_tax / 12
-    weekly_income_tax = income_tax / 52
-    daily_income_tax = income_tax / 365
+    monthly_values = [round(value, 2) for value in monthly_values]
+    weekly_values = [round(value, 2) for value in weekly_values]
+    daily_values = [round(value, 2) for value in daily_values]
 
-    monthly_net_salary = net_salary / 12
-    weekly_net_salary = net_salary / 52
-    daily_net_salary = net_salary / 365
-
-    # Create dictionary with yearly and extended values
     result = {
         'gross_salary': {
             'yearly': gross_salary,
-            'monthly': monthly_gross_salary,
-            'weekly': weekly_gross_salary,
-            'daily': daily_gross_salary,
+            'monthly': monthly_values[0],
+            'weekly': weekly_values[0],
+            'daily': daily_values[0],
         },
         'ni_contribution': {
             'yearly': ni_contribution,
-            'monthly': monthly_ni_contribution,
-            'weekly': weekly_ni_contribution,
-            'daily': daily_ni_contribution,
+            'monthly': monthly_values[1],
+            'weekly': weekly_values[1],
+            'daily': daily_values[1],
         },
         'income_tax': {
             'yearly': income_tax,
-            'monthly': monthly_income_tax,
-            'weekly': weekly_income_tax,
-            'daily': daily_income_tax,
+            'monthly': monthly_values[2],
+            'weekly': weekly_values[2],
+            'daily': daily_values[2],
         },
         'net_salary': {
             'yearly': net_salary,
-            'monthly': monthly_net_salary,
-            'weekly': weekly_net_salary,
-            'daily': daily_net_salary,
+            'monthly': monthly_values[3],
+            'weekly': weekly_values[3],
+            'daily': daily_values[3],
         }
     }
+
+    return result
+
 
     return result

@@ -18,6 +18,7 @@ def index(request):
                 return render(request, 'incometax/index.html',{'form':form,'ni_contribution':ni_contribution,'income_tax':income_tax, 'net_salary':net_salary ,'gross_salary':gross_salary,'breakdown_result':breakdown_result})
     else:
         form = SalaryForm()
+        return render(request,'incometax/index.html',{'form':form})
 
     
 
