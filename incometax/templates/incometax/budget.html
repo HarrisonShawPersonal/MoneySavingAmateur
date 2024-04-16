@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Golden Rule Financial Breakdown</title>
+    <style>
+      table.center th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100px;
+      }
+
+      table th {
+        background-color: #f2f2f2;
+      }
+
+      table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      table tr:hover {
+        background-color: #ddd;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        text-align: center;
+        color: #007bff;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+        <form action="" method="get">
+        <button type="submit" value="" name="home">Home</button>
+        </form>
+    </nav>
+    <h1>Golden Rule Financial Breakdown</h1>
+    <div>{% if budget is none%}
+        <form method="post">
+            {% csrf_token %} {{ form.as_p }}
+            <button type="submit">Calculate</button>
+          </form>
+          {% endif %}
+    </div>
+    <div> {% if budget is not none %}
+      <table class="center">
+        <tr>
+          <th>Net Salary</th>
+          <th>Amount</th>
+        </tr>
+        <tr>
+          <td>Monthly Needs</td>
+          <td>£{{ budget.monthly_needs }}</td>
+        </tr>
+        <tr>
+          <td>Monthly Wants</td>
+          <td>£{{ budget.monthly_wants }}</td>
+        </tr>
+        <tr>
+          <td>Monthly Savings</td>
+          <td>£{{ budget.monthly_savings }}</td>
+        </tr>
+      </table>
+      {% endif %}
+    </div>
+  </body>
+</html>

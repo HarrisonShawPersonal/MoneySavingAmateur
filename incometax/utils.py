@@ -48,7 +48,7 @@ def breakdown(gross_salary, ni_contribution, income_tax, net_salary):
 
     monthly_values = [value / 12 for value in (gross_salary, ni_contribution, income_tax, net_salary)]
     weekly_values = [value / 52 for value in (gross_salary, ni_contribution, income_tax, net_salary)]
-    daily_values = [value / 365 for value in (gross_salary, ni_contribution, income_tax, net_salary)]
+    daily_values = [value / 260 for value in (gross_salary, ni_contribution, income_tax, net_salary)]
 
     monthly_values = [round(value, 2) for value in monthly_values]
     weekly_values = [round(value, 2) for value in weekly_values]
@@ -83,5 +83,17 @@ def breakdown(gross_salary, ni_contribution, income_tax, net_salary):
 
     return result
 
+def golden_rule(net_salary_monthly):
+    wants_percent = Decimal('0.3')
+    monthly_needs = int(net_salary_monthly / 2)
+    monthly_wants = int(net_salary_monthly * wants_percent)
+    monthly_savings = int(net_salary_monthly/ 5)
+    golden_rule = {
+    "monthly_needs": monthly_needs,
+    "monthly_wants": monthly_wants,
+    "monthly_savings": monthly_savings
+    }
+    return golden_rule
 
-    return result
+def clear_cache():
+    print("Does this work")

@@ -84,9 +84,25 @@
       .tax-table tr:hover {
         background-color: #ddd;
       }
+      .calculator-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
     </style>
   </head>
   <body>
+    <nav>
+        <a href="http://127.0.0.1:8000/" id="delete-net-salary" class="active" onclick="event.preventDefault(); clear();">Home</a>
+    </nav>
     <h1>Calculate Taxes</h1>
     <form method="post">
       {% csrf_token %} {{ form.as_p }}
@@ -134,7 +150,18 @@
           <td>£{{ breakdown_result.net_salary.daily }}</td>
         </tr>
       </table>
+      <div>
+        <br>
+        <div class="calculator-button">
+        <a href="http://127.0.0.1:8000/budgeter">Let's see how we can budget this</a>
+      </div>
       {% endif %}
     </div>
   </body>
+  <script>
+    function clear() {
+        document.getElementById('delete-net-salary').submit();
+        window.location.href = "http://127.0.0.1:8000/";
+        }
+    </script>
 </html>
