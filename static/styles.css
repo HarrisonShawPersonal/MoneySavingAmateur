@@ -1,0 +1,98 @@
+/* Resetting default margin and padding */
+body,
+h1,
+form,
+button {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+h1 {
+    text-align: center;
+    color: #007bff;
+    margin-top: 20px;
+    /* Adjusting margin from the top */
+}
+
+nav {
+    background-color: transparent;
+    /* Making the nav bar transparent */
+    text-align: left;
+    /* Aligning content to the left */
+    padding: 10px 0;
+    /* Adjusting padding */
+}
+
+nav button {
+    background-color: #007bff;
+    /* Blue background only for the button */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+nav button:hover {
+    background-color: #0056b3;
+    /* Hover color for the button */
+}
+
+/* Adjusting the form style */
+form {
+    text-align: center;
+    margin-top: 20px;
+    /* Adding space from the top */
+}
+
+form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Adjusting the table style */
+table {
+    margin: 20px auto;
+    /* Centering the table */
+    border-collapse: collapse;
+    width: 80%;
+    /* Adjusting width */
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.errorlist {
+    visibility: hidden;
+}

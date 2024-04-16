@@ -9,6 +9,10 @@ def index(request):
     income_tax = None
     tax_result = None
     net_salary = None
+    if 'home' in request.GET:
+        response = HttpResponseRedirect('http://127.0.0.1:8000/')
+        response.delete_cookie("sessionid")
+        return response
     if request.method == "POST":
         form = SalaryForm(request.POST)
         if form.is_valid():
@@ -36,17 +40,15 @@ def index(request):
         form = SalaryForm()
         return render(request, "incometax/index.html", {"form": form})
 
-
 def home(request):
     if request.method == "GET":
         return render(request, "incometax/home.html", {})
 
-
 def budget(request):
     if 'home' in request.GET: 
-        print("murder")
-        clear_cache()
-        return HttpResponseRedirect("http://127.0.0.1:8000/")
+        response = HttpResponseRedirect("http://127.0.0.1:8000/")
+        response.delete_cookie("sessionid")
+        return response
     if request.session.get("net_salary") is not None:
         net_salary = request.session.get("net_salary")
         budget = golden_rule(net_salary)

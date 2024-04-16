@@ -1,107 +1,16 @@
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Calculate Taxes</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f8f9fa;
-        margin: 0;
-        padding: 0;
-      }
-
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      /* Heading styles */
-      h1 {
-        text-align: center;
-        color: #007bff;
-      }
-
-      h2 {
-        color: #343a40;
-      }
-
-      /* Form styles */
-      form {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-
-      form label {
-        display: block;
-        margin-bottom: 10px;
-      }
-
-      form input[type="text"],
-      form select {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ced4da;
-        border-radius: 4px;
-        box-sizing: border-box;
-      }
-
-      form button[type="submit"] {
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      form button[type="submit"]:hover {    
-        background-color: #0056b3;
-        .tax-table {
-          width: 100%;
-          border-collapse: collapse;
-        }
-      }
-      .tax-table th,
-      .tax-table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-      }
-
-      .tax-table th {
-        background-color: #f2f2f2;
-      }
-
-      .tax-table tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-
-      .tax-table tr:hover {
-        background-color: #ddd;
-      }
-      .calculator-button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 8px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
   </head>
   <body>
     <nav>
-        <a href="http://127.0.0.1:8000/" id="delete-net-salary" class="active" onclick="event.preventDefault(); clear();">Home</a>
+        <form action="" method="get">
+            <button type="submit" value="" name="home">Home</button>
+        </form>    
     </nav>
     <h1>Calculate Taxes</h1>
     <form method="post">
@@ -110,9 +19,7 @@
     </form>
     <div>
       {% if ni_contribution is not None and income_tax is not None %}
-      
       <h2>Tax Calculation Result</h2>
-      
       <table class="tax-table">
         <tr>
           <th></th>

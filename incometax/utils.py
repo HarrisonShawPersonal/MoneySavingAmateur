@@ -1,5 +1,5 @@
 from decimal import Decimal
-
+from django.http import HttpResponseRedirect
 
 def net(gross_salary):
     gross_salary_decimal = Decimal(str(gross_salary))
@@ -94,6 +94,3 @@ def golden_rule(net_salary_monthly):
     "monthly_savings": monthly_savings
     }
     return golden_rule
-
-def clear_cache():
-    print("Does this work")
