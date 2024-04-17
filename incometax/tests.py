@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .utils import net, breakdown
+from .utils import net, breakdown, golden_rule
 from decimal import Decimal
 
 class NetFunctionTests(TestCase):
@@ -24,30 +24,12 @@ class NetFunctionTests(TestCase):
         ni_contribution , income_tax , net_salary = net(150000)
         assert Decimal(ni_contribution) == Decimal("5010.6") and Decimal(income_tax) == Decimal("53703.0") and Decimal(net_salary) == Decimal("91286.4")
 
-# class BreakdownFuntcionTests(TestCase):
+class GoldenRuleFunctionTests(TestCase):
 
-#     def test_dict_populates_properly(self):
-#         ni_contribution, income_tax, net_salary = net(12570)
-#         result = breakdown(12570,ni_contribution,income_tax,net_salary)
-#         assert set(result.keys) == {'gross_salary','ni_contribution','income_tax','net_salary'}
-
-#     def test_breakdown_of_12570(self):
-#         ni_contribution, income_tax, net_salary = net(12570)
-#         test = breakdown(12570,ni_contribution,income_tax,net_salary)
-#         assert test.ni_contribution.monthly == 0  
-
-#     def test_breakdown_of_50270(self):
-#         ni_contribution , income_tax , net_salary = net(50270)
-#         test = breakdown(50270,ni_contribution,income_tax,net_salary)
-
-#     def test_breakdown_of_70000(self):
-#         ni_contribution , income_tax , net_salary = net(70000)
-#         test = breakdown(70000,ni_contribution,income_tax,net_salary)
-
-#     def test_breakdown_of_110000(self):
-#         ni_contribution , income_tax , net_salary = net(110000)
-#         test = breakdown(110000,ni_contribution,income_tax,net_salary)
-
-#     def test_breakdown_of_150000(self):
-#         ni_contribution , income_tax , net_salary = net(150000)
-#         test = breakdown(150000,ni_contribution,income_tax,net_salary)
+    def test_expected_results(self):
+        expected_result = {
+            "monthly_needs": 1500,
+            "monthly_wants": 900,
+            "monthly_savings": 600
+        }
+        assert golden_rule(3000) == expected_result

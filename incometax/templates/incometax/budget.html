@@ -22,6 +22,11 @@
           {% endif %}
     </div>
     <div> {% if budget is not none %}
+        <h2>Submit Monthly Costs</h2>
+      <form method="post">
+        {% csrf_token %} {{ form_monthly.as_p }}
+        <button type="submit">Calculate</button>
+      </form>
       <table class="center">
         <tr>
           <th>Net Salary</th>
@@ -40,6 +45,7 @@
           <td>£{{ budget.monthly_savings }}</td>
         </tr>
       </table>
+      
       {% endif %}
     </div>
   </body>

@@ -13,4 +13,8 @@ class TaxCalculationResult(models.Model):
     income_tax = models.DecimalField(max_digits=10, decimal_places=2)
 
 class NetSalary(models.Model):
-    net_salary = models.DecimalField(max_digits=10, decimal_places=2,null=True)        
+    net_salary = models.DecimalField(max_digits=10, decimal_places=2,null=True) 
+
+class MonthlyCosts(models.Model):
+    monthly_cost = models.DecimalField(max_digits=10,decimal_places=2,null=True)
+    description = models.CharField(max_length=200,null=True)

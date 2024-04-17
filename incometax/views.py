@@ -50,6 +50,7 @@ def budget(request):
         response.delete_cookie("sessionid")
         return response
     if request.session.get("net_salary") is not None:
+        form_monthly = MonthlyCostsForm(request.POST)
         net_salary = request.session.get("net_salary")
         budget = golden_rule(net_salary)
         print (budget)
@@ -57,15 +58,29 @@ def budget(request):
             request,
             "incometax/budget.html",
             {"net_salary": net_salary,
-            "budget":budget
+            "budget":budget,
+            'form_monthly':form_monthly
             }
         )
-    elif request.method == "POST":
+    elif "net_salary" in request.POST:
         form = NetSalaryForm(request.POST)
+        form_monthly = MonthlyCostsForm(request.POST)
         if form.is_valid():
             net_salary = form.cleaned_data["net_salary"]
-            budet = golden_rule(net_salary/12)
-            print(budet)
-            return render(request, 'incometax/budget.html', {"form":form , "budget":budet})
-    form = NetSalaryForm(request.POST)
+            budget = golden_rule(net_salary/12)
+            print(budget)
+            request.session["budget"] = budget
+            return render(request, 'incometax/budget.html', {"form":form , "budget":budget, 'form_monthly':form_monthly})
+    elif "monthly_cost" in request.POST:
+        form_monthly = MonthlyCostsForm(request.POST)
+        if form_monthly.is_valid():
+            budget = request.session.get("budget")
+            monthly_cost = form_monthly.cleaned_data["monthly_cost"]
+            description = form_monthly.cleaned_data["description"]
+            category = form_monthly.cleaned_data["category"]
+            print(monthly_cost,description,category)
+            return render(request, 'incometax/budget.html', {'form_monthly':form_monthly,'budget':budget ,'monthly_cost':monthly_cost,'description':description,'category':category} )
+
+
+    form = MonthlyCostsForm(request.POST)
     return render(request, 'incometax/budget.html', {'form':form})
