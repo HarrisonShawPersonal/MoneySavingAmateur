@@ -45,6 +45,7 @@ def home(request):
         return render(request, "incometax/home.html", {})
 
 def budget(request):
+    monthlies = {}
     if 'home' in request.GET: 
         response = HttpResponseRedirect("http://127.0.0.1:8000/")
         response.delete_cookie("sessionid")
@@ -78,8 +79,8 @@ def budget(request):
             monthly_cost = form_monthly.cleaned_data["monthly_cost"]
             description = form_monthly.cleaned_data["description"]
             category = form_monthly.cleaned_data["category"]
-            print(monthly_cost,description,category)
-            return render(request, 'incometax/budget.html', {'form_monthly':form_monthly,'budget':budget ,'monthly_cost':monthly_cost,'description':description,'category':category} )
+            monthlies[category] = monthly_cost
+            return render(request, 'incometax/budget.html', {'monthlies':monthlies,'form_monthly':form_monthly,'budget':budget ,'monthly_cost':monthly_cost,'description':description,'category':category} )
 
 
     form = MonthlyCostsForm(request.POST)

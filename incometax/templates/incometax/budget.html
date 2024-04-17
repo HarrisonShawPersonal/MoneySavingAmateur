@@ -31,21 +31,27 @@
         <tr>
           <th>Net Salary</th>
           <th>Amount</th>
+          <th>Spending</th>
         </tr>
         <tr>
           <td>Monthly Needs</td>
           <td>£{{ budget.monthly_needs }}</td>
+          {% if monthlies.needs is not none %}
+          <td>£{{ monthlies.needs}}</td> {% endif %}
         </tr>
         <tr>
           <td>Monthly Wants</td>
           <td>£{{ budget.monthly_wants }}</td>
+          {% if monthlies.wants is not none %}
+          <td>£{{ monthlies.wants }}</td> {% endif %}
         </tr>
         <tr>
           <td>Monthly Savings</td>
           <td>£{{ budget.monthly_savings }}</td>
+          {% if monthlies.savings is not none %}
+          <td>£{{ monthlies.savings }}</td> {% endif %}
         </tr>
       </table>
-      
       {% endif %}
     </div>
   </body>
